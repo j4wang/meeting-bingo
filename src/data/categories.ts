@@ -1,5 +1,7 @@
 import type { BuzzwordCategory } from '../types'
 
+// Sharks roster snapshot: 2024-25 season. Review player list each off-season.
+
 // Words are assigned exclusively to one category — no cross-category duplicates.
 export const CATEGORIES: BuzzwordCategory[] = [
   {
@@ -153,6 +155,79 @@ export const CATEGORIES: BuzzwordCategory[] = [
       'feature flag',
       'service mesh',
       'rate limiting',
+    ],
+  },
+  {
+    id: 'sharks',
+    name: 'SJ Sharks',
+    description: 'Current players, legends, and game-day buzzwords',
+    icon: '🦈',
+    words: [
+      // --- Legends ---
+      'Patrick Marleau',
+      'Joe Thornton',
+      'Joe Pavelski',
+      'Evgeni Nabokov',
+      'Dan Boyle',
+      'Owen Nolan',
+      'Vincent Damphousse',
+      'Mike Vernon',
+      'Jeremy Roenick',
+      'Dany Heatley',
+      'Marco Sturm',
+      'Ryane Clowe',
+
+      // --- Current players, 2024-25 ---
+      'Macklin Celebrini',
+      'Will Smith',
+      'Collin Graf',
+      'Michael Misa',
+      'Alexander Wennberg',
+      'Tyler Toffoli',
+      'Mario Ferraro',
+      'Dmitry Orlov',
+      'Sam Dickinson',
+      'Alex Nedeljkovic',
+      'Yaroslav Askarov',
+      'Kiefer Sherwood',
+
+      // --- Hockey buzzwords ---
+      'power play',
+      'penalty kill',
+      'hat trick',
+      'five hole',
+      'wrist shot',
+      'slap shot',
+      'breakaway',
+      'icing',
+      'face-off',
+      'plus-minus',
+      'Shark Tank',
+      'teal',
+      'goal horn',
+      'shutout',
+      'overtime',
+      'shootout',
+      'bar down',
+      'one-timer',
+      'odd-man rush',
+      'empty net',
+      'delayed penalty',
+      'forecheck',
+      'neutral zone',
+      'blue line',
+      'crease',
+      'snipe',
+      'saucer pass',
+      'tip in',
+      'wraparound',
+      'dump and chase',
+      'breakout',
+      'cross-check',
+      'high-sticking',
+      'game-winner',
+      'two-line pass',
+      'screen shot',
     ],
   },
 ]

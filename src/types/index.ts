@@ -14,7 +14,7 @@ export interface BingoCard {
   words: string[]
 }
 
-export type CategoryId = 'agile' | 'corporate' | 'tech'
+export type CategoryId = 'agile' | 'corporate' | 'tech' | 'sharks'
 
 export interface GameState {
   status: 'idle' | 'playing' | 'won'

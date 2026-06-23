@@ -3,8 +3,7 @@ import type { CategoryId, GameState } from '../types'
 import { generateCard } from '../lib/cardGenerator'
 import { checkForBingo, countFilled } from '../lib/bingoChecker'
 import { useLocalStorage } from './useLocalStorage'
-
-const SCHEMA_VERSION = 1
+import { STORAGE_KEY, SCHEMA_VERSION } from '../lib/constants'
 
 export const DEFAULT_GAME_STATE: GameState = {
   status: 'idle',
@@ -21,7 +20,7 @@ export const DEFAULT_GAME_STATE: GameState = {
 
 export function useGame() {
   const [gameState, setGameState] = useLocalStorage<GameState>(
-    'meeting-bingo-game',
+    STORAGE_KEY,
     DEFAULT_GAME_STATE,
   )
 

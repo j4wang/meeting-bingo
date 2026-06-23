@@ -5,11 +5,9 @@ import { LandingPage } from './components/LandingPage'
 import { CategorySelect } from './components/CategorySelect'
 import { GameBoard } from './components/GameBoard'
 import { Button } from './components/ui/Button'
+import { STORAGE_KEY, SCHEMA_VERSION } from './lib/constants'
 
 type Screen = 'landing' | 'category' | 'game'
-
-const STORAGE_KEY = 'meeting-bingo-game'
-const SCHEMA_VERSION = 1
 
 function loadSavedGame(): GameState | null {
   try {

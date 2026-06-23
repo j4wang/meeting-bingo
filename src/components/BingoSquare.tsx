@@ -54,22 +54,21 @@ export function BingoSquare({ square, isWinningSquare, onClick }: BingoSquarePro
     : `${square.word} — ${square.isFilled ? 'filled' : 'not filled'}`
 
   return (
-    <div role="gridcell">
-      <button
-        ref={btnRef}
-        className={getClasses(square, isWinningSquare)}
-        onClick={square.isFreeSpace ? undefined : onClick}
-        disabled={square.isFreeSpace}
-        aria-pressed={square.isFilled}
-        aria-label={label}
-      >
-        {icon && (
-          <span className="block text-base leading-none mb-0.5" aria-hidden="true">
-            {icon}
-          </span>
-        )}
-        <span className="leading-tight break-words w-full">{square.word}</span>
-      </button>
-    </div>
+    <button
+      ref={btnRef}
+      role="gridcell"
+      className={getClasses(square, isWinningSquare)}
+      onClick={square.isFreeSpace ? undefined : onClick}
+      disabled={square.isFreeSpace}
+      aria-pressed={square.isFilled}
+      aria-label={label}
+    >
+      {icon && (
+        <span className="block text-base leading-none mb-0.5" aria-hidden="true">
+          {icon}
+        </span>
+      )}
+      <span className="leading-tight break-words w-full">{square.word}</span>
+    </button>
   )
 }

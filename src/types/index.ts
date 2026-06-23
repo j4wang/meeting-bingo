@@ -41,7 +41,6 @@ export interface SpeechRecognitionState {
   isSilent: boolean
   transcript: string
   interimTranscript: string
-  detectedWords: string[]
   error: string | null
 }
 

@@ -24,7 +24,7 @@ function buildShareText(game: GameState): string {
   const categoryName =
     CATEGORIES.find((c) => c.id === game.category)?.name ?? game.category ?? 'Unknown'
   const elapsed = formatElapsed(game.startedAt, game.completedAt)
-  const filled = game.filledCount
+  const filled = game.filledCount - 1 // exclude the pre-filled free space
   const line = game.winningLine ? formatLine(game.winningLine) : 'Unknown'
 
   return [

@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import type { Toast as ToastType } from '../types'
-import { getClosestToWin } from '../lib/bingoChecker'
+import { checkForBingo, getClosestToWin } from '../lib/bingoChecker'
 import { detectWordsWithAliases } from '../lib/wordDetector'
 import { useSpeechRecognition } from '../hooks/useSpeechRecognition'
 import { useGame } from '../hooks/useGame'
@@ -38,21 +38,36 @@ export function GameBoard({ category, onExit }: GameBoardProps) {
   const onSpeechResult = useCallback(
     (finalTranscript: string) => {
       if (!gameState.card || gameState.status === 'won') return
+
+      // Exclude the free space from alreadyFilled — its word string is not a detection target
       const alreadyFilled = new Set(
-        gameState.card.squares.flat().filter((s) => s.isFilled).map((s) => s.word),
+        gameState.card.squares.flat().filter((s) => s.isFilled && !s.isFreeSpace).map((s) => s.word),
       )
-      const cardWords = gameState.card.words
-      const matched = detectWordsWithAliases(finalTranscript, cardWords, alreadyFilled)
+      const matched = detectWordsWithAliases(finalTranscript, gameState.card.words, alreadyFilled)
       if (matched.length === 0) return
 
       setDetectedWords((prev) => [...prev, ...matched])
 
+      // Track locally which words we fill in this event so we can detect a mid-loop win
+      // and stop before showing spurious toasts for words after the game-winning fill.
+      const localFilled = new Set(alreadyFilled)
+      const flatSquares = gameState.card.squares.flat()
+
       for (const word of matched) {
-        const sq = gameState.card!.squares.flat().find((s) => s.word === word)
-        if (sq && !sq.isFilled) {
-          fillSquare(sq.row, sq.col, true)
-          addToast(`✓ "${word}" detected!`, 'success')
-        }
+        if (localFilled.has(word)) continue
+        const sq = flatSquares.find((s) => s.word === word)
+        if (!sq || sq.isFilled) continue
+
+        localFilled.add(word)
+        fillSquare(sq.row, sq.col, true)
+        addToast(`✓ "${word}" detected!`, 'success')
+
+        // Simulate the fill to detect a game-winning square; if so, stop the loop.
+        // This prevents spurious toasts for subsequent words in the same isFinal event.
+        const simSquares = gameState.card.squares.map((r) =>
+          r.map((s) => (localFilled.has(s.word) || s.isFilled ? { ...s, isFilled: true } : s)),
+        )
+        if (checkForBingo({ ...gameState.card, squares: simSquares })) break
       }
     },
     [gameState, fillSquare, addToast],

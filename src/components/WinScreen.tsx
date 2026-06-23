@@ -33,17 +33,20 @@ export function WinScreen({ gameState, onKeepPlaying, onPlayAgain }: WinScreenPr
     if (prefersReduced) return
 
     const end = Date.now() + 2500
+    let cancelled = false
+    let rafHandle = 0
+
     const fire = () => {
-      if (Date.now() > end) return
-      confetti({
-        particleCount: 60,
-        spread: 70,
-        origin: { y: 0.5 },
-        disableForReducedMotion: true,
-      })
-      requestAnimationFrame(fire)
+      if (cancelled || Date.now() > end) return
+      confetti({ particleCount: 60, spread: 70, origin: { y: 0.5 }, disableForReducedMotion: true })
+      rafHandle = requestAnimationFrame(fire)
     }
     fire()
+
+    return () => {
+      cancelled = true
+      cancelAnimationFrame(rafHandle)
+    }
   }, [])
 
   const elapsed = formatElapsed(gameState.startedAt, gameState.completedAt)

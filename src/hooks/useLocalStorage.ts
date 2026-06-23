@@ -14,13 +14,15 @@ export function useLocalStorage<T>(
   })
 
   const setValue = (value: T | ((prev: T) => T)) => {
-    try {
-      const next = value instanceof Function ? value(storedValue) : value
-      setStoredValue(next)
-      localStorage.setItem(key, JSON.stringify(next))
-    } catch {
-      // quota exceeded or private browsing — continue with in-memory state
-    }
+    setStoredValue((prev) => {
+      const next = value instanceof Function ? value(prev) : value
+      try {
+        localStorage.setItem(key, JSON.stringify(next))
+      } catch {
+        // quota exceeded or private browsing — continue with in-memory state
+      }
+      return next
+    })
   }
 
   return [storedValue, setValue]

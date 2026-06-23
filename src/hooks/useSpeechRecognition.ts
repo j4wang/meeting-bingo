@@ -1,3 +1,7 @@
+// Locale: hardcoded for en-US. WORD_ALIASES in wordDetector.ts covers common spoken variants
+// for US English. Non-US English speakers may experience lower detection accuracy.
+// lang is set to 'en-US' on the SpeechRecognition instance below.
+
 import { useCallback, useEffect, useRef, useState } from 'react'
 import type { SpeechRecognitionState } from '../types'
 
@@ -39,7 +43,6 @@ export function useSpeechRecognition(onResult: OnResultCallback): SpeechRecognit
     isSilent: false,
     transcript: '',
     interimTranscript: '',
-    detectedWords: [],
     error: null,
   })
 
@@ -175,7 +178,7 @@ export function useSpeechRecognition(onResult: OnResultCallback): SpeechRecognit
   }, [])
 
   const resetTranscript = useCallback(() => {
-    setState((prev) => ({ ...prev, transcript: '', interimTranscript: '', detectedWords: [] }))
+    setState((prev) => ({ ...prev, transcript: '', interimTranscript: '' }))
   }, [])
 
   return { ...state, startListening, stopListening, resetTranscript }

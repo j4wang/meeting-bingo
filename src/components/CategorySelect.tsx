@@ -12,6 +12,7 @@ const SAMPLES: Record<CategoryId, string[]> = {
   agile: ['sprint', 'backlog', 'story points', 'retrospective'],
   corporate: ['synergy', 'circle back', 'ROI', 'low-hanging fruit'],
   tech: ['kubernetes', 'CI/CD', 'microservices', 'observability'],
+  sharks: ['Celebrini', 'Patrick Marleau', 'hat trick', 'Shark Tank'],
 }
 
 export function CategorySelect({ onSelect, onBack }: CategorySelectProps) {
@@ -20,7 +21,7 @@ export function CategorySelect({ onSelect, onBack }: CategorySelectProps) {
       <div className="max-w-3xl w-full space-y-8">
         <h1 className="text-3xl font-bold text-gray-900 text-center">Choose Your Buzzword Pack</h1>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {CATEGORIES.map((cat) => (
             <Card key={cat.id} className="flex flex-col items-center text-center space-y-3 p-6">
               <span className="text-4xl">{cat.icon}</span>

@@ -11,6 +11,23 @@ const WORD_ALIASES: Record<string, string[]> = {
   'wip limit': ['work in progress limit'],
   'devops': ['dev ops'],
   'kanban': ['kan ban'],
+
+  // Sharks — player nicknames and spoken variants
+  'joe thornton': ['jumbo joe'],
+  'patrick marleau': ['patty marleau'],
+  'evgeni nabokov': ['nabokov', 'nabby'],
+  'macklin celebrini': ['celebrini', 'mack celebrini'],
+  'alexander wennberg': ['wennberg', 'alex wennberg'],
+  'alex nedeljkovic': ['nedeljkovic'],
+  'yaroslav askarov': ['askarov', 'yaroslav'],
+
+  // Sharks — hockey terms
+  'power play': ['on the power play', 'man advantage', 'pp goal'],
+  'penalty kill': ['on the penalty kill', 'shorthanded'],
+  'five hole': ['through the five hole', 'five-hole'],
+  'plus-minus': ['plus minus'],
+  'odd-man rush': ['odd man rush', 'two on one', 'three on two'],
+  'hat trick': ['hat-trick'],
 }
 
 /**
